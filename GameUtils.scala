@@ -1,3 +1,5 @@
+import scala.io.StdIn.readInt
+
 object GameUtils {
   def listAsString[T](lt: List[T]): String = lt match {
     case Nil => ""
@@ -9,7 +11,7 @@ object GameUtils {
     case _ => ele::listOfElements(size - 1, ele)
   }
 
-  def changeMatrixValue[T](mt: List[List[T]], x: Int, y: Int, value: T): List[List[T]] = {
-    mt updated(y, mt(y) updated(x, value))
-  }
+  def changeMatrixValue[T](mt: List[List[T]], x: Int, y: Int, value: T): List[List[T]] =  mt updated(y, mt(y) updated(x, value))
+
+  def getInput: Int  = readInt()
 }
