@@ -1,7 +1,9 @@
-object Main {
-
-  def main(args: Array[String]): Unit = {
-    val game = new Game(5, '*', '+')
-    game.gameLoop()
-  }
+object Main extends App {
+  val l = List(
+    List(Cells.Empty, Cells.Empty, Cells.Empty),
+    List(Cells.Empty, Cells.Empty, Cells.Empty),
+    List(Cells.Empty, Cells.Empty, Cells.Empty)
+  )
+  val game = new Game(3)
+  game.displayBoard(l)
 }
