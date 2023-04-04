@@ -1,14 +1,17 @@
 import Utils.createList
 
+import scala.annotation.tailrec
+
 case class Game(size: Int) {
   type Board = List[List[Cells.Cell]]
   val defaultBoard: Board = createList(size, createList(size, Cells.Empty))
 
-  def isValidMove(board: Board, x: Int, y: Int): Boolean = {
+  private def isValidMove(board: Board, x: Int, y: Int): Boolean = {
     Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
   }
 
   // T1
+  @tailrec
   private def randomMove(board: Board, rand: MyRandom): ((Int, Int), MyRandom) = {
     val (x, rand2) = rand.nextInt(size)
     val (y, rand3) = rand2.nextInt(size)
@@ -38,6 +41,7 @@ case class Game(size: Int) {
 
   // TODO T4
   def hasContiguousLine(board: Board, player: Cells.Cell) = {
+    val cells = Utils.getIndexInMatrix(board, player)
   }
 
   // TODO T5
