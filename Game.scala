@@ -14,7 +14,9 @@ case class Game(size: Int) {
    * @return      True se a jogada é válida, False caso contrário
    */
   private def isValidMove(board: Board, x: Int, y: Int): Boolean = {
-    Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
+    //Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
+      val l_temp = 0 until size
+      l_temp contains x && l_temp contains y && board(y)(x) == Cells.Empty
   }
 
   // T1
