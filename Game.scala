@@ -6,6 +6,13 @@ case class Game(size: Int) {
   type Board = List[List[Cells.Cell]]
   val defaultBoard: Board = createList(size, createList(size, Cells.Empty))
 
+  /* Função auxiliar que avalia se o jogador fez uma jogada válida
+   *
+   * @param board Tabuleiro do jogo
+   * @param x     Coordenada X da jogada
+   * @param y     Coordenada Y da jogada
+   * @return      True se a jogada é válida, False caso contrário
+   */
   private def isValidMove(board: Board, x: Int, y: Int): Boolean = {
     Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
   }

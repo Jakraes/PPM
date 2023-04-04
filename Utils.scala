@@ -43,4 +43,18 @@ object Utils {
   def filterToBounds[T](l: List[List[T]], i: List[(Int, Int)]): List[(Int, Int)] = {
     i.filter{case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1}
   }
+
+  // T4
+  def checkConnection[T](l: List[List[T]], value: T): Boolean = {
+    val indexes = filterToBounds(l, getIndexInMatrix(l, value))
+
+    def auxSearch(l: List[List[T]], i: List[(Int, Int)]) = i match {
+      case Nil => Nil
+      case x::xs => {
+      
+      }
+    }
+
+    true // Placeholder, tem que ser mudado depois
+  }
 }
