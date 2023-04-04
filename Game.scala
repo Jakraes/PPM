@@ -5,18 +5,19 @@ import scala.annotation.tailrec
 case class Game(size: Int) {
   type Board = List[List[Cells.Cell]]
   val defaultBoard: Board = createList(size, createList(size, Cells.Empty))
-
+}
+object Game{
   /* Função auxiliar que avalia se o jogador fez uma jogada válida
-   *
-   * @param board Tabuleiro do jogo
-   * @param x     Coordenada X da jogada
-   * @param y     Coordenada Y da jogada
-   * @return      True se a jogada é válida, False caso contrário
-   */
-  private def isValidMove(board: Board, x: Int, y: Int): Boolean = {
+     *
+     * @param board Tabuleiro do jogo
+     * @param x     Coordenada X da jogada
+     * @param y     Coordenada Y da jogada
+     * @return      True se a jogada é válida, False caso contrário
+     */
+  private def isValidMove(board: Board, x: Int, y: Int,size: Int): Boolean = {
     //Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
-      val l_temp = 0 until size
-      l_temp contains x && l_temp contains y && board(y)(x) == Cells.Empty
+    val l_temp = 0 until size
+    l_temp contains x && l_temp contains y && board(y)(x) == Cells.Empty
   }
 
   // T1
@@ -39,7 +40,7 @@ case class Game(size: Int) {
   private def displayBoard(board: Board) = {
     def aux(board: Board, acc: Int = 0): String = board match {
       case Nil => ""
-      case x::xs => " " * acc + Cells.Red + " " + (x foldRight "") (_ + " " + _) + Cells.Red + "\n" + aux(xs, acc + 1)
+      case x :: xs => " " * acc + Cells.Red + " " + (x foldRight "")(_ + " " + _) + Cells.Red + "\n" + aux(xs, acc + 1)
     }
 
     println("< -" + " - " * size + "- >")
@@ -92,7 +93,7 @@ case class Game(size: Int) {
     }
   }
 
-  def start() {
+  def start(defaultBoard:Board) {
     val rand = MyRandom(0)
     val input = MyInput()
     displayBoard(defaultBoard)

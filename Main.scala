@@ -1,7 +1,7 @@
 object Main extends App {
 
  val game = new Game(7)
- game.start()
+ game.start(game.defaultBoard)
 
   def getIndexInList[T](l: List[T], value: T, accX: Int = 0): List[Int] = l match {
     case Nil => Nil
