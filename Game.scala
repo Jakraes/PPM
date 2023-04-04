@@ -1,10 +1,15 @@
-import scala.annotation.tailrec
+import Utils.createList
 
 case class Game(size: Int) {
   type Board = List[List[Cells.Cell]]
+  val defaultBoard: Board = createList(size, createList(size, Cells.Empty))
+
+  def isValidMove(board: Board, x: Int, y: Int): Boolean = {
+    Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
+  }
 
   // T1
-  def randomMove(board: Board, rand: MyRandom): ((Int, Int), MyRandom) = {
+  private def randomMove(board: Board, rand: MyRandom): ((Int, Int), MyRandom) = {
     val (x, rand2) = rand.nextInt(size)
     val (y, rand3) = rand2.nextInt(size)
     board(y)(x) match {
@@ -14,25 +19,70 @@ case class Game(size: Int) {
   }
 
   // T2
-  def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = {
+  private def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = {
     board updated(col, board(col) updated(row, player))
   }
 
   // T3
-  def displayBoard(board: Board) = {
+  private def displayBoard(board: Board) = {
     def aux(board: Board, acc: Int = 0): String = board match {
       case Nil => ""
-      case x::xs => " " * acc + Cells.Blue + " " + (x foldRight "") (_ + " " + _) + Cells.Blue + "\n" + aux(xs, acc + 1)
+      case x::xs => " " * acc + Cells.Red + " " + (x foldRight "") (_ + " " + _) + Cells.Red + "\n" + aux(xs, acc + 1)
     }
 
-    println((" " + Cells.Red) * size)
+    println("< -" + " - " * size + "- >")
+    println((" " + Cells.Blue) * size)
     print(aux(board))
-    println(" " * (size + 1) + (" " + Cells.Red) * size)
+    println(" " * (size + 1) + (" " + Cells.Blue) * size)
   }
 
-  // T4
-  // def hasContiguousLine(board: Board)
+  // TODO T4
+  def hasContiguousLine(board: Board, player: Cells.Cell) = {
+  }
 
-  // T5
+  // TODO T5
   // def undo(???)
+
+  private def loop(board: Board = defaultBoard, turn: Int = 0, rand: MyRandom, input: MyInput) {
+    if (turn % 2 == 0) { // Turno do jogador
+      println("1. Fazer jogada \nQ. Abandonar jogo")
+      val opt = input.getLine
+
+      opt match {
+        case "1" => {
+          print("X: ")
+          val x = input.getInt
+          print("Y: ")
+          val y = input.getInt
+          if (isValidMove(board, x, y)) {
+            val newBoard = play(board, Cells.Blue, x, y)
+            displayBoard(newBoard)
+            loop(newBoard, turn + 1, rand, input)
+          }
+          else {
+            println("Invalid move")
+            loop(board, turn, rand, input)
+          }
+        }
+        case "Q" | "q" => {}
+        case _ => {
+          loop(board, turn, rand, input)
+        }
+      }
+    }
+
+    else { // Turno do CPU
+      val ((x, y), newRand) = randomMove(board, rand)
+      val newBoard = play(board, Cells.Red, x, y)
+      displayBoard(newBoard)
+      loop(newBoard, turn + 1, newRand, input)
+    }
+  }
+
+  def start() {
+    val rand = MyRandom(0)
+    val input = MyInput()
+    displayBoard(defaultBoard)
+    loop(rand = rand, input = input)
+  }
 }
