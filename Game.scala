@@ -1,15 +1,14 @@
 import Utils.createList
-
 import scala.annotation.tailrec
+import Cells.Board
 
 case class Game(size: Int) {
-  type Board = List[List[Cells.Cell]]
   val defaultBoard: Board = createList(size, createList(size, Cells.Empty))
 
 
-  def isValidMove(board: Board, x: Int, y: Int) = Game.isValidMove(board, x, y,this.size)
+  def isValidMove(board: Board, x: Int, y: Int) = Game.isValidMove(board, x, y)
 
-  def randomMove(board: Board, x: Int, y: Int) = Game.randomMove(board,x,y,this.size)
+  def randomMove(board: Board, rand: MyRandom) = Game.randomMove(board,rand)
 
   def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = Game.play(board,player,row,col)
 
@@ -20,8 +19,8 @@ case class Game(size: Int) {
   def start = Game.start(this.defaultBoard)
 
 
-  //TODO: the one bellow might need cleanning
-  def loop(board: Board , turn: Int = 0, rand: MyRandom, input: MyInput) = loop(this.defaultBoard,turn,rand,input)
+  //TODO: the one bellow might need cleaning
+  def loop(board: Board , turn: Int = 0, rand: MyRandom, input: MyInput) = Game.loop(this.defaultBoard, turn, rand, input)
 
 }
 
@@ -36,17 +35,17 @@ object Game{
      * @param y     Coordenada Y da jogada
      * @return      True se a jogada é válida, False caso contrário
      */
-  private def isValidMove(board: Board, x: Int, y: Int,size: Int): Boolean = {
+  private def isValidMove(board: Board, x: Int, y: Int): Boolean = {
     //Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
-    val l_temp = 0 until size
-    l_temp contains x && l_temp contains y && board(y)(x) == Cells.Empty
+    val l_temp = 0 until board.size
+   ( l_temp contains x) && (l_temp contains y) && board(y)(x) == Cells.Empty
   }
 
   // T1
   @tailrec
   private def randomMove(board: Board, rand: MyRandom): ((Int, Int), MyRandom) = {
-    val (x, rand2) = rand.nextInt(size)
-    val (y, rand3) = rand2.nextInt(size)
+    val (x, rand2) = rand.nextInt(board.size)
+    val (y, rand3) = rand2.nextInt(board.size)
     board(y)(x) match {
       case Cells.Empty => ((x, y), rand3)
       case _ => randomMove(board, rand3)
@@ -66,10 +65,10 @@ object Game{
       case x :: xs => " " * acc + Cells.Red + " " + (x foldRight "")(_ + " " + _) + Cells.Red + "\n" + aux(xs, acc + 1)
     }
 
-    println("< -" + " - " * size + "- >")
-    println((" " + Cells.Blue) * size)
+    println("< -" + " - " * board.size + "- >")
+    println((" " + Cells.Blue) * board.size)
     print(aux(board))
-    println(" " * (size + 1) + (" " + Cells.Blue) * size)
+    println(" " * (board.size + 1) + (" " + Cells.Blue) * board.size)
   }
 
   // TODO T4
@@ -91,6 +90,7 @@ object Game{
           val x = input.getInt
           print("Y: ")
           val y = input.getInt
+
           if (isValidMove(board, x, y)) {
             val newBoard = play(board, Cells.Blue, x, y)
             displayBoard(newBoard)
@@ -116,10 +116,10 @@ object Game{
     }
   }
 
-  def start(defaultBoard:Board) {
+  def start(board: Board) {
     val rand = MyRandom(0)
     val input = MyInput()
-    displayBoard(defaultBoard)
-    loop(rand = rand, input = input)
+    displayBoard(board)
+    loop(board, rand = rand, input = input)
   }
 }

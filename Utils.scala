@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+
 object Utils {
   /* Função que cria uma lista de um certo tamanho preenchida com o mesmo elemento
    *
