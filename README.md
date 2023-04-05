@@ -7,3 +7,14 @@ The players take turns placing a stone of their color on a single cell on the bo
 To compensate for the first player's advantage, the swap rule is normally used. This rule allows the second player to choose whether to switch positions with the first player after the first player makes the first move.
 
 When it is clear to both players who will win the game, it is customary, but not required, for the losing player to resign. In practice, most games of Hex end with one of the players resigning.
+
+---
+
+## TODO
+* ~~T1~~
+* ~~T2~~
+* ~~T3~~
+* **T4**
+* **T5**
+* ~~T6~~ (Se necessário adicionar mais coisas)
+* **T7**
