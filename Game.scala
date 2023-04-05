@@ -83,7 +83,7 @@ object Game{
   // TODO T5
   // def undo(???)
 
-  
+
   // TODO T6
   // Arranjar maneira desta função funcionar sem dar return a Any
   private def menuLoop(rand: MyRandom, input: MyIO, size: Int = 5, diff: Int = 0): Any = {
