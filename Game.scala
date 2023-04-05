@@ -5,7 +5,27 @@ import scala.annotation.tailrec
 case class Game(size: Int) {
   type Board = List[List[Cells.Cell]]
   val defaultBoard: Board = createList(size, createList(size, Cells.Empty))
+  def isValidMove(board: Board, x: Int, y: Int) = Game.isValidMove(board, x, y,this.size)
+
+  def randomMove(board: Board, x: Int, y: Int) = Game.randomMove(board,x,y,this.size)
+
+  def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = Game.play(board,player,row,col)
+
+  def displayBoard(board: Board) = Game.displayBoard(board)
+
+  def hasContiguousLine(board: Board, player: Cells.Cell) = Game.hasContiguousLine(board, player)
+
+  def start = Game.start(this.defaultBoard)
+
+
+  //TODO: the one bellow might need cleanning
+  def loop(board: Board , turn: Int = 0, rand: MyRandom, input: MyInput) = loop(this.defaultBoard,turn,rand,input)
+
 }
+
+//TODO: tirar privates?
+
+
 object Game{
   /* Função auxiliar que avalia se o jogador fez uma jogada válida
      *
@@ -57,7 +77,7 @@ object Game{
   // TODO T5
   // def undo(???)
 
-  private def loop(board: Board = defaultBoard, turn: Int = 0, rand: MyRandom, input: MyInput) {
+  private def loop(board: Board, turn: Int = 0, rand: MyRandom, input: MyInput) {
     if (turn % 2 == 0) { // Turno do jogador
       println("1. Fazer jogada \nQ. Abandonar jogo")
       val opt = input.getLine
