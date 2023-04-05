@@ -1,6 +1,6 @@
 object Main extends App{
 
-        val game= new Game(7)
+        val game = new Game(7)
         game.start()
         val l=List(
         List(3,2,1),
@@ -8,7 +8,7 @@ object Main extends App{
         List(3,1,2)
         )
         println(filterToBounds(l,getIndexInMatrix(l,3))
-        def getIndexInList[T](l:List[T],value:T,accX:Int=0):List[Int]=l match{
+        def getIndexInList[T](l:List[T],value:T,accX:Int=0):List[Int]= l match{
         case Nil=>Nil
         case x::xs=>if(x==value)accX::getIndexInList(xs,value,accX+1)else getIndexInList(xs,value,accX+1)
         }
