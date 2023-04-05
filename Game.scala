@@ -1,15 +1,17 @@
 import Utils.createList
+
 import scala.annotation.tailrec
 import Cells.Board
+import jdk.internal.util.xml.impl.Input
 
-case class Game(rand: MyRandom, input: MyInput) {
+case class Game(rand: MyRandom, input: MyIO) {
   def isValidMove(board: Board, x: Int, y: Int) = Game.isValidMove(board, x, y)
 
   def randomMove(board: Board) = Game.randomMove(board,rand)
 
   def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = Game.play(board, player, row, col)
 
-  def displayBoard(board: Board) = Game.displayBoard(board)
+  def displayBoard(board: Board) = Game.displayBoard(board, input)
 
   def hasContiguousLine(board: Board, player: Cells.Cell) = Game.hasContiguousLine(board, player)
 
@@ -61,16 +63,16 @@ object Game{
   }
 
   // T3
-  private def displayBoard(board: Board) = {
+  private def displayBoard(board: Board, input: MyIO) = {
     def aux(board: Board, acc: Int = 0): String = board match {
       case Nil => ""
       case x :: xs => " " * acc + Cells.Red + " " + (x foldRight "")(_ + " " + _) + Cells.Red + "\n" + aux(xs, acc + 1)
     }
 
-    println("< -" + " - " * board.size + "- >")
-    println((" " + Cells.Blue) * board.size)
-    print(aux(board))
-    println(" " * (board.size + 1) + (" " + Cells.Blue) * board.size)
+    input.println("< -" + " - " * board.size + "- >")
+    input.println((" " + Cells.Blue) * board.size)
+    input.print(aux(board))
+    input.println(" " * (board.size + 1) + (" " + Cells.Blue) * board.size)
   }
 
   // TODO T4
@@ -81,29 +83,31 @@ object Game{
   // TODO T5
   // def undo(???)
 
-  // TODO: Arranjar maneira desta função funcionar sem dar return a Any
-  private def menuLoop(rand: MyRandom, input: MyInput, size: Int = 5, diff: Int = 0): Any = {
-    print(s"${Console.RESET}1. Começar jogo \n2. Configurar jogo \nQ. Sair\n> ")
+  
+  // TODO T6
+  // Arranjar maneira desta função funcionar sem dar return a Any
+  private def menuLoop(rand: MyRandom, input: MyIO, size: Int = 5, diff: Int = 0): Any = {
+    input.print(s"${Console.RESET}1. Começar jogo \n2. Configurar jogo \nQ. Sair\n> ")
     val i = input.getLine
 
     i match {
       case "1" => {
         val newBoard = createBoard(size)
-        displayBoard(newBoard)
-        gameLoop(newBoard, rand = rand, input = input)
+        displayBoard(newBoard, input)
+        gameLoop(newBoard, rand = rand, io = input)
       }
       case "2" => {
-        def menuConfig(rand: MyRandom, input: MyInput, size: Int = 0, diff: Int = 0): Any = {
-          print(s"${Console.RESET}1. Mudar tamanho do tabuleiro \n2. Mudar dificuldade \nB. Voltar \n> ")
+        def menuConfig(rand: MyRandom, input: MyIO, size: Int = 0, diff: Int = 0): Any = {
+          input.print(s"${Console.RESET}1. Mudar tamanho do tabuleiro \n2. Mudar dificuldade \nB. Voltar \n> ")
           val j = input.getLine
           j match {
             case "1" => {
-              print(s"${Console.RESET}Tamanho: ")
+              input.print(s"${Console.RESET}Tamanho: ")
               val newSize = input.getInt
               menuConfig(rand, input, newSize, diff)
             }
             case "2" => {
-              print(s"${Console.RESET}Dificuldade: ")
+              input.print(s"${Console.RESET}Dificuldade: ")
               val newDiff = input.getInt
               menuConfig(rand, input, size, newDiff)
             }
@@ -119,31 +123,31 @@ object Game{
     }
   }
 
-  private def gameLoop(board: Board, turn: Int = 0, rand: MyRandom, input: MyInput) {
+  private def gameLoop(board: Board, turn: Int = 0, rand: MyRandom, io: MyIO) {
     if (turn % 2 == 0) { // Turno do jogador
-      print(s"${Console.RESET}1. Fazer jogada \nQ. Abandonar jogo \n> ")
-      val opt = input.getLine
+      io.print(s"${Console.RESET}1. Fazer jogada \nQ. Abandonar jogo \n> ")
+      val opt = io.getLine
 
       opt match {
         case "1" => {
-          print("X: ")
-          val x = input.getInt
-          print("Y: ")
-          val y = input.getInt
+          io.print("X: ")
+          val x = io.getInt
+          io.print("Y: ")
+          val y = io.getInt
 
           if (isValidMove(board, x, y)) {
             val newBoard = play(board, Cells.Blue, x, y)
-            displayBoard(newBoard)
-            gameLoop(newBoard, turn + 1, rand, input)
+            displayBoard(newBoard, io)
+            gameLoop(newBoard, turn + 1, rand, io)
           }
           else {
-            println("Invalid move")
-            gameLoop(board, turn, rand, input)
+            io.println("Invalid move")
+            gameLoop(board, turn, rand, io)
           }
         }
-        case "Q" | "q" => menuLoop(rand, input, board.size)
+        case "Q" | "q" => menuLoop(rand, io, board.size)
         case _ => {
-          gameLoop(board, turn, rand, input)
+          gameLoop(board, turn, rand, io)
         }
       }
     }
@@ -151,12 +155,12 @@ object Game{
     else { // Turno do CPU
       val ((x, y), newRand) = randomMove(board, rand)
       val newBoard = play(board, Cells.Red, x, y)
-      displayBoard(newBoard)
-      gameLoop(newBoard, turn + 1, newRand, input)
+      displayBoard(newBoard, io)
+      gameLoop(newBoard, turn + 1, newRand, io)
     }
   }
 
-  def start(rand: MyRandom, input: MyInput) {
+  def start(rand: MyRandom, input: MyIO) {
     menuLoop(rand, input)
   }
 }
