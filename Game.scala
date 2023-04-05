@@ -2,32 +2,35 @@ import Utils.createList
 import scala.annotation.tailrec
 import Cells.Board
 
-case class Game(size: Int) {
-  val defaultBoard: Board = createList(size, createList(size, Cells.Empty))
-
-
+case class Game(rand: MyRandom, input: MyInput) {
   def isValidMove(board: Board, x: Int, y: Int) = Game.isValidMove(board, x, y)
 
-  def randomMove(board: Board, rand: MyRandom) = Game.randomMove(board,rand)
+  def randomMove(board: Board) = Game.randomMove(board,rand)
 
-  def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = Game.play(board,player,row,col)
+  def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = Game.play(board, player, row, col)
 
   def displayBoard(board: Board) = Game.displayBoard(board)
 
   def hasContiguousLine(board: Board, player: Cells.Cell) = Game.hasContiguousLine(board, player)
 
-  def start = Game.start(this.defaultBoard)
+  def start = Game.start(rand, input)
 
 
-  //TODO: the one bellow might need cleaning
-  def loop(board: Board , turn: Int = 0, rand: MyRandom, input: MyInput) = Game.loop(this.defaultBoard, turn, rand, input)
+  def menuLoop(size: Int = 0, diff: Int = 0) = Game.menuLoop(rand, input, size, diff)
+
+  // TODO: the one bellow might need cleaning
+  // Concordo, ainda precisa aí de um quality check - João C
+  def loop(board: Board , turn: Int = 0) = Game.gameLoop(board, turn, rand, input)
 
 }
 
-//TODO: tirar privates?
+// TODO: tirar privates?
+// Se achares melhor então ya - João C
 
 
 object Game{
+  private def createBoard(size: Int): Board = createList(size, createList(size, Cells.Empty))
+
   /* Função auxiliar que avalia se o jogador fez uma jogada válida
      *
      * @param board Tabuleiro do jogo
@@ -38,7 +41,7 @@ object Game{
   private def isValidMove(board: Board, x: Int, y: Int): Boolean = {
     //Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
     val l_temp = 0 until board.size
-   ( l_temp contains x) && (l_temp contains y) && board(y)(x) == Cells.Empty
+    (l_temp contains x) && (l_temp contains y) && board(y)(x) == Cells.Empty
   }
 
   // T1
@@ -54,7 +57,6 @@ object Game{
 
   // T2
   private def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = {
-
     board updated(col, board(col) updated(row, player))
   }
 
@@ -79,9 +81,47 @@ object Game{
   // TODO T5
   // def undo(???)
 
-  private def loop(board: Board, turn: Int = 0, rand: MyRandom, input: MyInput) {
+  // TODO: Arranjar maneira desta função funcionar sem dar return a Any
+  private def menuLoop(rand: MyRandom, input: MyInput, size: Int = 5, diff: Int = 0): Any = {
+    print(s"${Console.RESET}1. Começar jogo \n2. Configurar jogo \nQ. Sair\n> ")
+    val i = input.getLine
+
+    i match {
+      case "1" => {
+        val newBoard = createBoard(size)
+        displayBoard(newBoard)
+        gameLoop(newBoard, rand = rand, input = input)
+      }
+      case "2" => {
+        def menuConfig(rand: MyRandom, input: MyInput, size: Int = 0, diff: Int = 0): Any = {
+          print(s"${Console.RESET}1. Mudar tamanho do tabuleiro \n2. Mudar dificuldade \nB. Voltar \n> ")
+          val j = input.getLine
+          j match {
+            case "1" => {
+              print(s"${Console.RESET}Tamanho: ")
+              val newSize = input.getInt
+              menuConfig(rand, input, newSize, diff)
+            }
+            case "2" => {
+              print(s"${Console.RESET}Dificuldade: ")
+              val newDiff = input.getInt
+              menuConfig(rand, input, size, newDiff)
+            }
+            case "B" | "b" => menuLoop(rand, input, size, diff)
+            case _ => menuConfig(rand, input, size, diff)
+          }
+        }
+
+        menuConfig(rand, input, size, diff)
+      }
+      case "Q" | "q" => {}
+      case _ => menuLoop(rand, input, size, diff)
+    }
+  }
+
+  private def gameLoop(board: Board, turn: Int = 0, rand: MyRandom, input: MyInput) {
     if (turn % 2 == 0) { // Turno do jogador
-      println("1. Fazer jogada \nQ. Abandonar jogo")
+      print(s"${Console.RESET}1. Fazer jogada \nQ. Abandonar jogo \n> ")
       val opt = input.getLine
 
       opt match {
@@ -94,16 +134,16 @@ object Game{
           if (isValidMove(board, x, y)) {
             val newBoard = play(board, Cells.Blue, x, y)
             displayBoard(newBoard)
-            loop(newBoard, turn + 1, rand, input)
+            gameLoop(newBoard, turn + 1, rand, input)
           }
           else {
             println("Invalid move")
-            loop(board, turn, rand, input)
+            gameLoop(board, turn, rand, input)
           }
         }
-        case "Q" | "q" => {}
+        case "Q" | "q" => menuLoop(rand, input, board.size)
         case _ => {
-          loop(board, turn, rand, input)
+          gameLoop(board, turn, rand, input)
         }
       }
     }
@@ -112,14 +152,11 @@ object Game{
       val ((x, y), newRand) = randomMove(board, rand)
       val newBoard = play(board, Cells.Red, x, y)
       displayBoard(newBoard)
-      loop(newBoard, turn + 1, newRand, input)
+      gameLoop(newBoard, turn + 1, newRand, input)
     }
   }
 
-  def start(board: Board) {
-    val rand = MyRandom(0)
-    val input = MyInput()
-    displayBoard(board)
-    loop(board, rand = rand, input = input)
+  def start(rand: MyRandom, input: MyInput) {
+    menuLoop(rand, input)
   }
 }
