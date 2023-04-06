@@ -139,16 +139,16 @@ object Game{
             val oldBoard = board
             val newBoard = play(board, Cells.Blue, x, y)
             displayBoard(newBoard, io)
-            gameLoop(newBoard, turn + 1, rand, io, oldBoard, turn)
+            gameLoop(newBoard, turn + 1, rand, io, oldBoard, turn) // T5
           }
           else {
             io.println("Invalid move")
-            gameLoop(board, turn, rand, io, oldBoard, oldTurn)
+            gameLoop(board, turn, rand, io, oldBoard, oldTurn) // T5
           }
         }
         case "2" => {
           displayBoard(oldBoard, io)
-          gameLoop(oldBoard, oldTurn, rand, io, oldBoard, oldTurn)
+          gameLoop(oldBoard, oldTurn, rand, io, oldBoard, oldTurn) // T5
         }
         case "Q" | "q" => menuLoop(rand, io, board.size)
         case _ => {
