@@ -22,7 +22,7 @@ case class Game(rand: MyRandom, input: MyIO) {
 
   // TODO: the one bellow might need cleaning
   // Concordo, ainda precisa aí de um quality check - João C
-  def loop(board: Board , turn: Int = 0) = Game.gameLoop(board, turn, rand, input)
+  def loop(board: Board , turn: Int = 0) = Game.gameLoop(board, turn, rand, input, board, turn)
 
 }
 
@@ -94,7 +94,7 @@ object Game{
       case "1" => {
         val newBoard = createBoard(size)
         displayBoard(newBoard, input)
-        gameLoop(newBoard, rand = rand, io = input)
+        gameLoop(newBoard, rand = rand, io = input, oldBoard = newBoard, oldTurn = 0)
       }
       case "2" => {
         def menuConfig(rand: MyRandom, input: MyIO, size: Int = 0, diff: Int = 0): Any = {
@@ -123,9 +123,9 @@ object Game{
     }
   }
 
-  private def gameLoop(board: Board, turn: Int = 0, rand: MyRandom, io: MyIO) {
+  private def gameLoop(board: Board, turn: Int = 0, rand: MyRandom, io: MyIO, oldBoard: Board, oldTurn: Int) {
     if (turn % 2 == 0) { // Turno do jogador
-      io.print(s"${Console.RESET}1. Fazer jogada \nQ. Abandonar jogo \n> ")
+      io.print(s"${Console.RESET}1. Fazer jogada \n2. Undo \nQ. Abandonar jogo \n> ")
       val opt = io.getLine
 
       opt match {
@@ -136,18 +136,23 @@ object Game{
           val y = io.getInt
 
           if (isValidMove(board, x, y)) {
+            val oldBoard = board
             val newBoard = play(board, Cells.Blue, x, y)
             displayBoard(newBoard, io)
-            gameLoop(newBoard, turn + 1, rand, io)
+            gameLoop(newBoard, turn + 1, rand, io, oldBoard, turn)
           }
           else {
             io.println("Invalid move")
-            gameLoop(board, turn, rand, io)
+            gameLoop(board, turn, rand, io, oldBoard, oldTurn)
           }
+        }
+        case "2" => {
+          displayBoard(oldBoard, io)
+          gameLoop(oldBoard, oldTurn, rand, io, oldBoard, oldTurn)
         }
         case "Q" | "q" => menuLoop(rand, io, board.size)
         case _ => {
-          gameLoop(board, turn, rand, io)
+          gameLoop(board, turn, rand, io, oldBoard, oldTurn)
         }
       }
     }
@@ -156,7 +161,7 @@ object Game{
       val ((x, y), newRand) = randomMove(board, rand)
       val newBoard = play(board, Cells.Red, x, y)
       displayBoard(newBoard, io)
-      gameLoop(newBoard, turn + 1, newRand, io)
+      gameLoop(newBoard, turn + 1, newRand, io, oldBoard, oldTurn)
     }
   }
 

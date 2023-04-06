@@ -15,6 +15,6 @@ When it is clear to both players who will win the game, it is customary, but not
 * ~~T2~~
 * ~~T3~~
 * **T4**
-* **T5**
+* ~~T5~~
 * ~~T6~~ (Se necessário adicionar mais coisas)
 * **T7**
