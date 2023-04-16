@@ -48,11 +48,9 @@ object Utils {
    * @return    Lista de pares de indices filtrada
    */
   def filterToBounds[T](l: List[List[T]], i: List[(Int, Int)]): List[(Int, Int)] = {
-    //i.filter{case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1}
+    i filter ( (x, y) => {x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1})
 
-    //TODO
-    val range = (0 until l.size)
-    i filter ((e) => { ( range contains (e._1)) && (range contains (e._2)) } )
+   
   }
 
   // T4
