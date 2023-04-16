@@ -23,8 +23,10 @@ object Utils {
    * @return      Lista com os indices onde foi encontrado value
    */
   def getIndexInList[T](l: List[T], value: T, accX: Int = 0): List[Int] = l match {
-    case Nil => Nil
-    case x::xs => if (x == value) accX::getIndexInList(xs, value, accX + 1) else getIndexInList(xs, value, accX + 1)
+   case Nil => Nil
+   case x => if (x.head == value) accX::getIndexInList(x.tail, value, accX + 1) else getIndexInList(x.tail, value, accX + 1)
+
+
   }
 
   /* Função que retorna todos os pares de indices onde foi encontrado um certo valor na matriz
@@ -46,7 +48,11 @@ object Utils {
    * @return    Lista de pares de indices filtrada
    */
   def filterToBounds[T](l: List[List[T]], i: List[(Int, Int)]): List[(Int, Int)] = {
-    i.filter{case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1}
+    //i.filter{case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1}
+
+    //TODO
+    val range = (0 until l.size)
+    i filter ((e) => { ( range contains (e._1)) && (range contains (e._2)) } )
   }
 
   // T4
@@ -60,6 +66,6 @@ object Utils {
       }
     }
 
-    true // Placeholder, tem que ser mudado depois
+    true //TODO, isto é Placeholder, tem que ser mudado depois
   }
 }

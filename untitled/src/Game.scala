@@ -1,8 +1,7 @@
+import Cells.Board
 import Utils.createList
 
 import scala.annotation.tailrec
-import Cells.Board
-import jdk.internal.util.xml.impl.Input
 
 case class Game(rand: MyRandom, input: MyIO) {
   def isValidMove(board: Board, x: Int, y: Int) = Game.isValidMove(board, x, y)
@@ -25,10 +24,6 @@ case class Game(rand: MyRandom, input: MyIO) {
   def loop(board: Board , turn: Int = 0) = Game.gameLoop(board, turn, rand, input, board, turn)
 
 }
-
-// TODO: tirar privates?
-// Se achares melhor então ya - João C
-
 
 object Game{
   private def createBoard(size: Int): Board = createList(size, createList(size, Cells.Empty))
