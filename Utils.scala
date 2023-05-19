@@ -25,8 +25,6 @@ object Utils {
   def getIndexInList[T](l: List[T], value: T, accX: Int = 0): List[Int] = l match {
    case Nil => Nil
    case x => if (x.head == value) accX::getIndexInList(x.tail, value, accX + 1) else getIndexInList(x.tail, value, accX + 1)
-
-
   }
 
   /* Função que retorna todos os pares de indices onde foi encontrado um certo valor na matriz
@@ -48,9 +46,7 @@ object Utils {
    * @return    Lista de pares de indices filtrada
    */
   def filterToBounds[T](l: List[List[T]], i: List[(Int, Int)]): List[(Int, Int)] = {
-    i filter ( (x, y) => {x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1})
-
-   
+    i.filter {case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1}
   }
 
   // T4
