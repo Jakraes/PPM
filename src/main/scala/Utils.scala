@@ -82,15 +82,17 @@ object Utils {
       if (Cells.Blue equals player) c._2 == 0 else c._1 == 0
     })
 
-    //TODO dont visited already visited
-    def loop(hood: List[(Int, Int)], prev: (Int, Int)): Boolean = {
+    def loop(hood: List[(Int, Int)], visited:List[(Int, Int)]): (Boolean,List[(Int, Int)]) = {
       hood match {
-        case Nil => false
-        case h :: _ if (if (Cells.Blue equals player) h._2 equals board.size - 1 else h._1 equals board.size - 1) => true
-        case h :: _ if(loop(playerCells filter (isNeighborhood(_, h)) filterNot (_ equals prev) , h))=> true
-        case _ :: t =>  loop(t, prev)
+        case Nil => (false,visited)
+        case h :: _ if (if (Cells.Blue equals player) h._2 equals board.size - 1 else h._1 equals board.size - 1) => (true,visited)
+        case h :: t => {
+          val (truthValue,visitedNodes) = loop(playerCells filter (isNeighborhood(_, h)) filterNot(h :: visited contains _), h :: visited)
+          if (truthValue) (true,visitedNodes)
+          else loop(t, h :: visited)
+        }
       }
     }
-    loop(startNodes, (-20, -20))
+    loop(startNodes, Nil)._1
   }
 }
