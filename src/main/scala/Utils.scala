@@ -1,3 +1,5 @@
+import Cells.Board
+
 import scala.annotation.tailrec
 
 object Utils {
@@ -49,17 +51,46 @@ object Utils {
     i.filter {case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1}
   }
 
-  // T4
-  def checkConnection[T](l: List[List[T]], value: T): Boolean = {
-    val indexes = filterToBounds(l, getIndexInMatrix(l, value))
 
-    def auxSearch(l: List[List[T]], i: List[(Int, Int)]) = i match {
-      case Nil => Nil
-      case x::xs => {
+  def isValidMove(board: Board, x: Int, y: Int): Boolean = {
+    //Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
+    val l_temp = 0 until board.size
+    (l_temp contains x) && (l_temp contains y) && board(y)(x) == Cells.Empty
+  }
 
-      }
+  def hasContiguousLine(board: Board, player: Cells.Cell) = {
+
+    def isNeighborhood(cell: (Int, Int), center: (Int, Int)): Boolean = {
+      val center_x = center._1
+      val center_y = center._2
+
+      val x = cell._1
+      val y = cell._2
+
+      //TODO double check e clean
+      def aux(center_x: Int, center_y: Int, y: Int, x1: Int, x2: Int) = (center_y equals y) && (x1 :: x2 :: Nil contains center_x)
+
+      aux(center_x, center_y, y, x - 1, x + 1) || aux(center_x, center_y, y - 1, x, x + 1) || aux(center_x, center_y, y + 1, x - 1, x)
     }
 
-    true //TODO, isto é Placeholder, tem que ser mudado depois
+    val playerCells = Utils.getIndexInMatrix(board, player)
+
+    //TODO
+
+    // player é Blue
+    val startNodes = playerCells filter ((c) => {
+      if (Cells.Blue equals player) c._2 == 0 else c._1 == 0
+    })
+
+    //TODO dont visited already visited
+    def loop(hood: List[(Int, Int)], prev: (Int, Int)): Boolean = {
+      hood match {
+        case Nil => false
+        case h :: _ if (if (Cells.Blue equals player) h._2 equals board.size - 1 else h._1 equals board.size - 1) => true
+        case h :: _ if(loop(playerCells filter (isNeighborhood(_, h)) filterNot (_ equals prev) , h))=> true
+        case _ :: t =>  loop(t, prev)
+      }
+    }
+    loop(startNodes, (-20, -20))
   }
 }

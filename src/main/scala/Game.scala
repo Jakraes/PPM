@@ -1,18 +1,19 @@
 import Cells.Board
-import Utils.createList
+import Utils.{createList, hasContiguousLine, isValidMove}
 
 case class Game(rand: MyRandom) {
   val input = MyIO
-  def isValidMove(board: Board, x: Int, y: Int) = Game.isValidMove(board, x, y)
+  def isValidMove(board: Board, x: Int, y: Int) = Utils.isValidMove(board, x, y)
 
-  //TODO corrigir?
+  //TODO corrigir
   def randomMove(board: Board) = rand.randomMove(board,rand)
 
   def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = Game.play(board, player, row, col)
 
-  def displayBoard(board: Board) = input.displayBoard(board) //TODO corrigir?
+  def displayBoard(board: Board) = input.displayBoard(board) //TODO corrigir
 
-  def hasContiguousLine(board: Board, player: Cells.Cell) = Game.hasContiguousLine(board, player)
+  //TODO corrigir
+  //def hasContiguousLine(board: Board, player: Cells.Cell) = Utils.hasContiguousLine(board, player)
 
   def start = Game.start(rand)
 
@@ -32,53 +33,12 @@ object Game{
      * @param y     Coordenada Y da jogada
      * @return      True se a jogada é válida, False caso contrário
      */
-  private def isValidMove(board: Board, x: Int, y: Int): Boolean = {
-    //Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
-    val l_temp = 0 until board.size
-    (l_temp contains x) && (l_temp contains y) && board(y)(x) == Cells.Empty
-  }
+
 
   // T2
   private def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = {
     board updated(col, board(col) updated(row, player))
   }
-
-
-  // TODO T4
-   def hasContiguousLine(board: Board, player: Cells.Cell) = {
-
-  def getNeighborhood(cell:(Int,Int),center:(Int,Int)):Boolean = {
-    val center_x = center._1
-    val center_y = center._2
-
-    val x = cell._1
-    val y = cell._2
-
-    //TODO double check e clean
-    def aux(center_x:Int,center_y:Int,y:Int, x1:Int,x2:Int) = (center_y equals  y) && (x1 :: x2 :: Nil  contains center_x )
-    aux(center_x,center_y,y ,x-1,x+1)   || aux(center_x,center_y,y - 1 ,x,x+1) || aux(center_x,center_y,y + 1 ,x-1,x)
-  }
-    val playerCells = Utils.getIndexInMatrix(board, player)
-
-
-    //TODO finalizar
-
-    // player é Blue
-    val startNodes = playerCells filter ((c)=> { if(Cells.Blue equals player) c._2 == 0  else  c._1 == 0})
-
-
-
-    def loop(hood:List[(Int,Int)],prev:(Int,Int)):Boolean ={
-      hood match {
-        case Nil => false
-        case h :: t if(if(Cells.Blue equals player) h._2 equals board.size - 1  else  h._1 equals board.size - 1) => true
-        case h :: t =>loop(playerCells filter( getNeighborhood(_,h) ) filterNot (_ == prev), h) ||
-          loop(t,prev)
-        }
-      }
-    loop(startNodes,(-20,-20))
-    }
-
 
   // TODO T6
   // Arranjar maneira desta função funcionar sem dar return a Any
@@ -91,15 +51,19 @@ object Game{
 
     i match {
       case "1" => {
-        val newBoard = createBoard(size)
-        input.displayBoard(newBoard)
-        gameLoop(newBoard, rand = rand, oldBoard = newBoard, oldTurn = 0)
+        comecarJogo(rand, size, input)
       }
       case "2" => {
         menuConfig(rand,  size, diff)
       }
       case _ => {}
     }
+  }
+
+  private def comecarJogo(rand: MyRandom, size: Int, input: MyIO.type): Unit = {
+    val newBoard = createBoard(size)
+    input.displayBoard(newBoard)
+    gameLoop(newBoard, rand = rand, oldBoard = newBoard, oldTurn = 0)
   }
 
   def menuConfig(rand: MyRandom, size: Int = 0, diff: Int = 0): Any = {
