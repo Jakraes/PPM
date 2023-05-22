@@ -1,5 +1,0 @@
-package FX
-
-class MenuConfig {
-
-}
