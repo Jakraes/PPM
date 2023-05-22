@@ -1,7 +1,7 @@
 import Cells.Board
 import Utils.createList
 
-case class Game(rand: MyRandom, size: Int) {
+case class Game(rand: MyRandom,size: Int) {
 
   val board = Game.createBoard(size)
 
@@ -27,6 +27,7 @@ object Game{
      * @param y     Coordenada Y da jogada
      * @return      True se a jogada é válida, False caso contrário
      */
+
 
   // T2
    def play(board: Board, player: Cells.Cell, row: Int, col: Int): Board = {

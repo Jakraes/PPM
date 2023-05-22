@@ -21,9 +21,14 @@ object MyRandom{
     ((nn % n ).abs, nextR)
   }
 
+  @tailrec
   def randomMove(board: Board, rand: MyRandom): ((Int, Int), MyRandom) = {
-    val casasVazias =  Utils.getIndexInMatrix(board, Cells.Empty)
-    val (i, rand2) = rand.nextInt(casasVazias.size)
-    (casasVazias(i), rand2)
-  }
-}
+    val (x, rand2) = rand.nextInt(board.size)
+    val (y, rand3) = rand2.nextInt(board.size)
+    board(y)(x) match {
+      case Cells.Empty => ((x, y), rand3)
+      case _ => randomMove(board, rand3)
+    }
+
+    //  val casasVazias =  Utils.getIndexInMatrix(board, Cells.Empty)}
+  }}
