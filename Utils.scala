@@ -24,8 +24,8 @@ object Utils {
    * @return      Lista com os indices onde foi encontrado value
    */
   def getIndexInList[T](l: List[T], value: T, accX: Int = 0): List[Int] = l match {
-   case Nil => Nil
-   case x => if (x.head == value) accX::getIndexInList(x.tail, value, accX + 1) else getIndexInList(x.tail, value, accX + 1)
+    case Nil => Nil
+    case x => if (x.head == value) accX :: getIndexInList(x.tail, value, accX + 1) else getIndexInList(x.tail, value, accX + 1)
   }
 
   /* Função que retorna todos os pares de indices onde foi encontrado um certo valor na matriz
@@ -37,7 +37,7 @@ object Utils {
    */
   def getIndexInMatrix[T](l: List[List[T]], value: T, accY: Int = 0): List[(Int, Int)] = l match {
     case Nil => Nil
-    case x::xs => getIndexInList(x, value).map(y => (y, accY)):::getIndexInMatrix(xs, value, accY + 1)
+    case x :: xs => getIndexInList(x, value).map(y => (y, accY)) ::: getIndexInMatrix(xs, value, accY + 1)
   }
 
   /* Função que filtra uma lista de pares de indices para apenas aqueles que estarão no limite de uma dada matriz
@@ -47,10 +47,16 @@ object Utils {
    * @return    Lista de pares de indices filtrada
    */
   def filterToBounds[T](l: List[List[T]], i: List[(Int, Int)]): List[(Int, Int)] = {
-    i.filter {case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1}
+    i.filter { case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1 }
   }
 
-<<<<<<<< HEAD:main/scala/Utils.scala
+  /* Função auxiliar que avalia se o jogador fez uma jogada válida
+       *
+       * @param board Tabuleiro do jogo
+       * @param x     Coordenada X da jogada
+       * @param y     Coordenada Y da jogada
+       * @return      True se a jogada é válida, False caso contrário
+       */
   def isValidMove(board: Board, x: Int, y: Int): Boolean = {
     //Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
     val l_temp = 0 until board.size
@@ -59,17 +65,6 @@ object Utils {
 
   def hasContiguousLine(board: Board, player: Cells.Cell) = {
 
-========
-
-  def isValidMove(board: Board, x: Int, y: Int): Boolean = {
-    //Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
-    val l_temp = 0 until board.size
-    (l_temp contains x) && (l_temp contains y) && board(y)(x) == Cells.Empty
-  }
-
-  def hasContiguousLine(board: Board, player: Cells.Cell) = {
-
->>>>>>>> 2f3906e4b3a84af773000eb0528aa02b7d698ea4:src/main/scala/Utils.scala
     def isNeighborhood(cell: (Int, Int), center: (Int, Int)): Boolean = {
       val center_x = center._1
       val center_y = center._2
@@ -92,17 +87,18 @@ object Utils {
       if (Cells.Blue equals player) c._2 == 0 else c._1 == 0
     })
 
-    def loop(hood: List[(Int, Int)], visited:List[(Int, Int)]): (Boolean,List[(Int, Int)]) = {
+    def loop(hood: List[(Int, Int)], visited: List[(Int, Int)]): (Boolean, List[(Int, Int)]) = {
       hood match {
-        case Nil => (false,visited)
-        case h :: _ if (if (Cells.Blue equals player) h._2 equals board.size - 1 else h._1 equals board.size - 1) => (true,visited)
+        case Nil => (false, visited)
+        case h :: _ if (if (Cells.Blue equals player) h._2 equals board.size - 1 else h._1 equals board.size - 1) => (true, visited)
         case h :: t => {
-          val (truthValue,visitedNodes) = loop(playerCells filter (isNeighborhood(_, h)) filterNot(h :: visited contains _), h :: visited)
-          if (truthValue) (true,visitedNodes)
+          val (truthValue, visitedNodes) = loop(playerCells filter (isNeighborhood(_, h)) filterNot (h :: visited contains _), h :: visited)
+          if (truthValue) (true, visitedNodes)
           else loop(t, h :: visited)
         }
       }
     }
+
     loop(startNodes, Nil)._1
   }
 }

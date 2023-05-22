@@ -1,7 +1,6 @@
-import javafx.event.ActionEvent
 import javafx.fxml.{FXML, FXMLLoader}
-import javafx.scene.{Node, Parent, Scene}
 import javafx.scene.control.Label
+import javafx.scene.{Parent, Scene}
 import javafx.stage.Stage
 
 class MenuPrincipal {
