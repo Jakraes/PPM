@@ -22,6 +22,7 @@ object MyRandom {
     (n, nextRandom)
   }
 
+  // T1
   def randomMove(board: Board, rand: MyRandom): ((Int, Int), MyRandom) = {
     val casasVazias = Utils.getIndexInMatrix(board, Cells.Empty)
     val (i, rand2) = rand.nextInt(casasVazias.size)

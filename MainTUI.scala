@@ -2,9 +2,8 @@ import Cells.Board
 import Game.play
 import Utils.{hasContiguousLine, isValidMove}
 
+// TODO T6
 object Main extends App {
-  // TODO T6
-  // Arranjar maneira desta função funcionar sem dar return a Any
 
   //TODO
   def menuConfig(rand: MyRandom, size: Int = 0, diff: Int = 0, humanFirst: Boolean = true): Any = {
@@ -33,7 +32,6 @@ object Main extends App {
 
   // TODO: the one bellow might need cleaning
   def gameLoop(board: Board, turn: Int = 0, rand: MyRandom, oldBoard: Board, oldTurn: Int) {
-
     def playerTurn(): Unit = {
       // Turno do jogador
       MyIO.print(s"${Console.RESET}\tClique em:\n\t1. Fazer jogada. \n\t2. Undo. \n\tQualquer tecla. Abandonar jogo. \n> ")

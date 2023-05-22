@@ -63,6 +63,7 @@ object Utils {
     (l_temp contains x) && (l_temp contains y) && board(y)(x) == Cells.Empty
   }
 
+  // T4
   def hasContiguousLine(board: Board, player: Cells.Cell) = {
 
     def isNeighborhood(cell: (Int, Int), center: (Int, Int)): Boolean = {
