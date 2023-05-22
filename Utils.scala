@@ -16,6 +16,7 @@ object Utils {
     loop(Nil, size)
   }
 
+
   /* Função que retorna todos os indices onde foi encontrado um certo valor na lista
    *
    * @param l     Lista a ser avaliada
@@ -24,8 +25,8 @@ object Utils {
    * @return      Lista com os indices onde foi encontrado value
    */
   def getIndexInList[T](l: List[T], value: T, accX: Int = 0): List[Int] = l match {
-   case Nil => Nil
-   case x => if (x.head == value) accX::getIndexInList(x.tail, value, accX + 1) else getIndexInList(x.tail, value, accX + 1)
+    case Nil => Nil
+    case x => if (x.head == value) accX::getIndexInList(x.tail, value, accX + 1) else getIndexInList(x.tail, value, accX + 1)
   }
 
   /* Função que retorna todos os pares de indices onde foi encontrado um certo valor na matriz
@@ -50,12 +51,19 @@ object Utils {
     i.filter {case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1}
   }
 
+  /* Função que verifica se um move é válido
+   * @param board   Tabuleiro do jogo em que se vai verificar o move
+   * @param x       Coordenada x do tabuleiro
+   * @param y       Coordenada y do tabuleiro
+   * @return        Se é válido ou não
+   */
   def isValidMove(board: Board, x: Int, y: Int): Boolean = {
     //Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
     val l_temp = 0 until board.size
     (l_temp contains x) && (l_temp contains y) && board(y)(x) == Cells.Empty
   }
 
+  // T4
   def hasContiguousLine(board: Board, player: Cells.Cell) = {
 
     def isNeighborhood(cell: (Int, Int), center: (Int, Int)): Boolean = {

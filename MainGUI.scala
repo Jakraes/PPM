@@ -7,10 +7,8 @@ class MainGUI extends Application{
     // Mudei a criação do MyRandom e do MyInput para a main para ser mais puro, o que acham? - João C
 
    override def start(primaryStage: Stage): Unit = {
-      Game(new MyRandom(0), 1).start
-
       primaryStage.setTitle("My Hello World App")
-      val fxmlLoader = new FXMLLoader(getClass.getResource("MenuPrincipal.fxml"))
+      val fxmlLoader = new FXMLLoader(getClass.getResource("FX/MenuPrincipal.fxml"))
       val mainViewRoot: Parent = fxmlLoader.load()
       val scene = new Scene(mainViewRoot)
       primaryStage.setScene(scene)
@@ -23,3 +21,4 @@ object FxApp {
       Application.launch(classOf[MainGUI], args: _*)
    }
 }
+
