@@ -1,3 +1,5 @@
+import Cells.Board
+
 import scala.annotation.tailrec
 
 object Utils {
@@ -14,7 +16,6 @@ object Utils {
     loop(Nil, size)
   }
 
-
   /* Função que retorna todos os indices onde foi encontrado um certo valor na lista
    *
    * @param l     Lista a ser avaliada
@@ -25,8 +26,6 @@ object Utils {
   def getIndexInList[T](l: List[T], value: T, accX: Int = 0): List[Int] = l match {
    case Nil => Nil
    case x => if (x.head == value) accX::getIndexInList(x.tail, value, accX + 1) else getIndexInList(x.tail, value, accX + 1)
-
-
   }
 
   /* Função que retorna todos os pares de indices onde foi encontrado um certo valor na matriz
@@ -48,24 +47,50 @@ object Utils {
    * @return    Lista de pares de indices filtrada
    */
   def filterToBounds[T](l: List[List[T]], i: List[(Int, Int)]): List[(Int, Int)] = {
-    //i.filter{case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1}
-
-    //TODO
-    val range = (0 until l.size)
-    i filter ((e) => { ( range contains (e._1)) && (range contains (e._2)) } )
+    i.filter {case (x, y) => x == 0 || x == l.size - 1 || y == 0 || y == l.size - 1}
   }
 
-  // T4
-  def checkConnection[T](l: List[List[T]], value: T): Boolean = {
-    val indexes = filterToBounds(l, getIndexInMatrix(l, value))
+  def isValidMove(board: Board, x: Int, y: Int): Boolean = {
+    //Range(0, size).contains(x) && Range(0, size).contains(y) && board(y)(x) == Cells.Empty
+    val l_temp = 0 until board.size
+    (l_temp contains x) && (l_temp contains y) && board(y)(x) == Cells.Empty
+  }
 
-    def auxSearch(l: List[List[T]], i: List[(Int, Int)]) = i match {
-      case Nil => Nil
-      case x::xs => {
+  def hasContiguousLine(board: Board, player: Cells.Cell) = {
 
-      }
+    def isNeighborhood(cell: (Int, Int), center: (Int, Int)): Boolean = {
+      val center_x = center._1
+      val center_y = center._2
+
+      val x = cell._1
+      val y = cell._2
+
+      //TODO double check e clean
+      def aux(center_x: Int, center_y: Int, y: Int, x1: Int, x2: Int) = (center_y equals y) && (x1 :: x2 :: Nil contains center_x)
+
+      aux(center_x, center_y, y, x - 1, x + 1) || aux(center_x, center_y, y - 1, x, x + 1) || aux(center_x, center_y, y + 1, x - 1, x)
     }
 
-    true //TODO, isto é Placeholder, tem que ser mudado depois
+    val playerCells = Utils.getIndexInMatrix(board, player)
+
+    //TODO
+
+    // player é Blue
+    val startNodes = playerCells filter ((c) => {
+      if (Cells.Blue equals player) c._2 == 0 else c._1 == 0
+    })
+
+    def loop(hood: List[(Int, Int)], visited:List[(Int, Int)]): (Boolean,List[(Int, Int)]) = {
+      hood match {
+        case Nil => (false,visited)
+        case h :: _ if (if (Cells.Blue equals player) h._2 equals board.size - 1 else h._1 equals board.size - 1) => (true,visited)
+        case h :: t => {
+          val (truthValue,visitedNodes) = loop(playerCells filter (isNeighborhood(_, h)) filterNot(h :: visited contains _), h :: visited)
+          if (truthValue) (true,visitedNodes)
+          else loop(t, h :: visited)
+        }
+      }
+    }
+    loop(startNodes, Nil)._1
   }
 }

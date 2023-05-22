@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.Double?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Polygon?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@BackgrougImage.jpg" />
+
+         </image>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="0.7176470756530762" green="0.7176470756530762" blue="0.7176470756530762" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+      </ImageView>
+      <Pane layoutX="2.0" layoutY="2.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+             <Polygon fill="#878889" layoutX="370.0" layoutY="75.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#1c9aff" strokeType="INSIDE">
+                 <points>
+      
+                     <Double fx:value="-50.0" />
+                     <Double fx:value="30.0" />
+      
+                     <Double fx:value="0.0" />
+                     <Double fx:value="60.0" />
+      
+                     <Double fx:value="50.0" />
+                     <Double fx:value="30.0" />
+      
+                     <Double fx:value="50.0" />
+                     <Double fx:value="-30.0" />
+      
+                     <Double fx:value="0.0" />
+                     <Double fx:value="-60.0" />
+      
+                     <Double fx:value="-50.0" />
+                     <Double fx:value="-30.0" />
+      
+      
+      
+                 </points>
+             </Polygon>
+            <Polygon fill="#878889" layoutX="230.0" layoutY="75.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#ff1c1c" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="300.0" layoutY="75.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#ff1c1c" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="230.0" layoutY="326.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#1c9aff" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="370.0" layoutY="326.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#ff1c1c" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="510.0" layoutY="326.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#1c9aff" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="335.0" layoutY="138.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="BLACK" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="440.0" layoutY="326.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#ff1c1c" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="265.0" layoutY="138.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="BLACK" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="300.0" layoutY="201.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="BLACK" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="405.0" layoutY="138.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#1c9aff" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="195.0" layoutY="264.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#1c9aff" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="475.0" layoutY="264.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#1c9aff" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="125.0" layoutY="138.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#1c9aff" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="90.0" layoutY="75.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#1c9aff" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="160.0" layoutY="75.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#ff1c1c" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="335.0" layoutY="264.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="BLACK" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="195.0" layoutY="138.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="BLACK" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="370.0" layoutY="201.0" points="-50.0, 30.0, 0.0, 60.0, 50.0, 30.0, 50.0, -30.0, 0.0, -60.0, -50.0, -30.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fill="#878889" layoutX="405.0" layoutY="264.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="BLACK" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="300.0" layoutY="326.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#ff1c1c" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="440.0" layoutY="201.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#1c9aff" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="160.0" layoutY="201.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="#1c9aff" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="265.0" layoutY="264.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="BLACK" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+            <Polygon fill="#878889" layoutX="230.0" layoutY="201.0" scaleX="0.7" scaleY="0.7" scaleZ="0.7" stroke="BLACK" strokeType="INSIDE">
+             <points>
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="60.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="30.0" />
+      
+                 <Double fx:value="50.0" />
+                 <Double fx:value="-30.0" />
+      
+                 <Double fx:value="0.0" />
+                 <Double fx:value="-60.0" />
+      
+                 <Double fx:value="-50.0" />
+                 <Double fx:value="-30.0" />
+      
+      
+      
+             </points>
+         </Polygon>
+         </children>
+      </Pane>
+   </children>
+</Pane>
