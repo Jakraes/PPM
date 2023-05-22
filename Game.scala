@@ -2,7 +2,6 @@ import Cells.Board
 import Utils.createList
 
 case class Game(rand: MyRandom, size: Int) {
-
   val board = Game.createBoard(size)
 
   def isValidMove(board: Board, x: Int, y: Int) = Utils.isValidMove(board, x, y)

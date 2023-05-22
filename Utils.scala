@@ -16,6 +16,11 @@ object Utils {
     loop(Nil, size)
   }
 
+  def matrixToList[T](l: List[List[T]]): List[T] = l match {
+    case Nil => Nil
+    case x::xs => x ::: matrixToList(xs)
+  }
+
   /* Função que retorna todos os indices onde foi encontrado um certo valor na lista
    *
    * @param l     Lista a ser avaliada
@@ -102,4 +107,6 @@ object Utils {
 
     loop(startNodes, Nil)._1
   }
+
+
 }

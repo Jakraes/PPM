@@ -34,7 +34,7 @@ object Main extends App {
   def gameLoop(board: Board, turn: Int = 0, rand: MyRandom, oldBoard: Board, oldTurn: Int) {
     def playerTurn(): Unit = {
       // Turno do jogador
-      MyIO.print(s"${Console.RESET}\tClique em:\n\t1. Fazer jogada. \n\t2. Undo. \n\tQualquer tecla. Abandonar jogo. \n> ")
+      MyIO.print(s"${Console.RESET}\tClique em:\n\t1. Fazer jogada. \n\t2. Undo. \n\t3. Guardar Jogo. \n\tQualquer tecla. Abandonar jogo. \n> ")
       val opt = MyIO.getLine
 
       opt match {
@@ -63,6 +63,10 @@ object Main extends App {
         case "2" => {
           MyIO displayBoard (oldBoard)
           gameLoop(oldBoard, oldTurn, rand, oldBoard, oldTurn) // T5
+        }
+        case "3" => {
+          MyIO.saveGame(turn, board, rand)
+          gameLoop(board, turn, rand, oldBoard, oldTurn)
         }
         case _ => {
           menuLoop(rand, board.size)
@@ -95,16 +99,29 @@ object Main extends App {
     val input = MyIO
     MyIO.print(s"${Console.RESET}Menu principal:\n")
 
-    input.print(s"${Console.RESET}\t1: Novo jogo \n\t2: Configurar jogo \n\tQualquer tecla: Sair\n> ")
+    input.print(s"${Console.RESET}\t1: Novo jogo \n\t2: Continuar Jogo \n\t3: Configurar jogo \n\tQualquer tecla: Sair\n> ")
     val i = input.getLine
 
     i match {
       case "1" => {
-        val game = Game(rand, 4)
+        val game = Game(rand, size)
         game.start()
-        gameLoop(game.board, rand = rand, oldBoard = game.board, oldTurn = 0)
+
+        MyIO.displayBoard(game.board)
+        if (humanFirst) gameLoop(game.board, rand = rand, oldBoard = game.board, oldTurn = 0)
+        else gameLoop(game.board, turn = 1, rand = rand, oldBoard = game.board, oldTurn = 0)
       }
       case "2" => {
+        //TODO NAO FUNCIONA
+
+        /*val (turn, board, rand) = MyIO.loadGame()
+        val game = (rand, board.size)
+
+        MyIO.displayBoard(board)
+        gameLoop(board, turn = turn, rand = rand, oldBoard = board, oldTurn = turn - 1)
+        */
+      }
+      case "3" => {
         menuConfig(rand, size, diff, humanFirst)
       }
       case _ => {}
